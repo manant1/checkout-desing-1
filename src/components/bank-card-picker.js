@@ -146,7 +146,7 @@ const BankCardPicker = ({ paymentMethods }) => {
           </div>
           <div style={{ width: 15 }}></div>
           <div className={"col"}>
-            <CustomInput id={"card-number"} name={"cardNumber"} label={"Card Number"} type={"bank-card"}
+            <CustomInput id={"card-number"} autocomplete={"cc-number"} name={"cardNumber"} label={"Card Number"} type={"bank-card"}
                          onChange={($event) => setFormData({ ...formData, cardNumber: $event.target.value })}
                          errors={formState.errors} reference={register({ required: true })}/>
           </div>
@@ -155,20 +155,20 @@ const BankCardPicker = ({ paymentMethods }) => {
           <div className={"col"}>
             <div className={"row"}>
               <div className={"col"}>
-                <CustomSelect id={"month"} name={"month"} label={"MM"} reference={register({ required: true })}
+                <CustomSelect id={"month"} name={"month"} autocomplete={"cc-exp-month"} label={"MM"} reference={register({ required: true })}
                               errors={formState.errors} options={monthOptions}
                               onChange={(value) => setFormData({ ...formData, expirationMonth: value })}/>
               </div>
               <div style={{ width: 15 }}></div>
               <div className={"col"}>
-                <CustomSelect id={"year"} name={"year"} label={"YY"} reference={register({ required: true })}
+                <CustomSelect id={"year"} name={"year"} label={"YY"} autocomplete={"cc-exp-year"} reference={register({ required: true })}
                               errors={formState.errors} options={yearOptions}
                               onChange={(value) => setFormData({ ...formData, expirationYear: value })}/>
               </div>
             </div>
             <div className={"row"}>
               <div className={"col"}>
-                <CustomInput id={"ccv"} name={"ccv"} label={"CCV"} type={"text"}
+                <CustomInput id={"ccv"} name={"ccv"} autocomplete={"cc-csc"} label={"CCV"} type={"text"}
                              errors={formState.errors}
                              onChange={($event) => setFormData({ ...formData, ccv: $event.target.value })}
                              reference={register({ required: true, minLength: 3, maxLength: 4 })}/>

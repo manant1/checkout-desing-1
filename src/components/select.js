@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { FaChevronDown } from "react-icons/fa"
 import * as classnames from "classnames"
 
-const CustomSelect = ({ id, name, label, options, onChange, reference, errors }) => {
+const CustomSelect = ({ id, name, label, options, onChange, reference, errors, autocomplete }) => {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
@@ -58,8 +58,7 @@ const CustomSelect = ({ id, name, label, options, onChange, reference, errors })
       <div className={"col-12"}>
         <div style={{ position: "relative" }}>
           <div className={"row"}>
-            <input onKeyDown={($event) => $event.preventDefault()} name={name} value={value} id={id} type={"string"}
-                   autoComplete="off" style={selectStyle} ref={reference}/>
+            <input autoComplete={autocomplete} onKeyDown={($event) => $event.preventDefault()} name={name} value={value} id={id} type={"string"} style={selectStyle} ref={reference}/>
             <FaChevronDown style={dropdownIconStyle} onClick={() => setOpen(!open)}/>
           </div>
           <div className={"col-12"}>
@@ -91,7 +90,8 @@ CustomSelect.defaultProps = {
   options: [],
   onChange: null,
   reference: null,
-  errors: {}
+  errors: {},
+  autocomplete: "off"
 }
 
 CustomSelect.propTypes = {
@@ -101,7 +101,8 @@ CustomSelect.propTypes = {
   options: PropTypes.array,
   onChange: PropTypes.any,
   reference: PropTypes.any,
-  errors: PropTypes.object
+  errors: PropTypes.object,
+  autocomplete: PropTypes.string
 }
 
 export default CustomSelect

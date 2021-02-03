@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import * as classnames from "classnames"
 
-const CustomInput = ({ type, id, name, label, reference, errors, onChange, style }) => {
+const CustomInput = ({ type, id, name, label, reference, errors, onChange, style, autocomplete }) => {
   const inputStyle = {
     height: 25,
     borderRadius: 10,
@@ -33,7 +33,7 @@ const CustomInput = ({ type, id, name, label, reference, errors, onChange, style
     return (
       <div className={"row"} style={{ marginTop: 5, marginBottom: 5, ...style }}>
         <label style={{ paddingTop: 5, paddingBottom: 5 }} className={"col-12"} for={id}>{label}</label>
-        <input style={inputStyle} className={"col-12"} onPaste={($event) => cardInputChanged($event)}
+        <input autoComplete={autocomplete} style={inputStyle} className={"col-12"} onPaste={($event) => cardInputChanged($event)}
                onChange={($event) => onChange($event)} onKeyPress={($event) => cardInputChanged($event)} type={"string"} id={id} name={name} ref={reference}/>
         {(Object.keys(errors).length !== 0 && errors[name]) && (
           <div className={classnames("error-text", "col-12")}>
@@ -47,7 +47,7 @@ const CustomInput = ({ type, id, name, label, reference, errors, onChange, style
   return (
     <div className={"row"} style={{ marginTop: 5, marginBottom: 5, ...style }}>
       <label style={{ paddingTop: 5, paddingBottom: 5 }} className={"col-12"} for={id}>{label}</label>
-      <input style={inputStyle} className={"col-12"} onChange={($event) => onChange($event)} type={type} id={id} name={name} ref={reference}/>
+      <input autoComplete={autocomplete} style={inputStyle} className={"col-12"} onChange={($event) => onChange($event)} type={type} id={id} name={name} ref={reference}/>
       {(Object.keys(errors).length !== 0 && errors[name]) && (
       <div className={classnames("error-text", "col-12")}>
         {errors[name].type === "required" && (errors[name].message || "This field is required")}
@@ -68,7 +68,8 @@ CustomInput.defaultProps = {
   reference: null,
   errors: null,
   onChange: null,
-  style: {}
+  style: {},
+  autocomplete: "off"
 }
 
 CustomInput.propTypes = {
@@ -79,7 +80,8 @@ CustomInput.propTypes = {
   reference: PropTypes.any,
   errors: PropTypes.object,
   onChnage: PropTypes.any,
-  style: PropTypes.object
+  style: PropTypes.object,
+  autocomplete: PropTypes.string
 }
 
 export default CustomInput
