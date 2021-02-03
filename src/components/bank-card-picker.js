@@ -139,7 +139,7 @@ const BankCardPicker = ({ paymentMethods }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={"row"}>
           <div className={"col"}>
-            <CustomInput id={"card-holder"} name={"cardHolder"} label={"Card Holder"} type={"text"}
+            <CustomInput id={"card-holder"} name={"cardHolder"} autocomplete={"cc-name"} label={"Card Holder"} type={"text"}
                          errors={formState.errors}
                          onChange={($event) => setFormData({ ...formData, cardHolder: $event.target.value })}
                          reference={register({ required: true })}/>
