@@ -11,6 +11,7 @@ const CustomSelect = ({ id, name, label, options, onChange, reference, errors })
     height: 25,
     borderRadius: 10,
     outline: "none",
+    fontSize: "16px",
     background: "white",
     width: "100%",
     border: "none",

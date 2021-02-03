@@ -290,7 +290,6 @@ main {
 .payment-type-btn-container {
     background: #3b3e71;
     border-radius: 10px;
-    margin: 10px;
     padding: 10px;
     text-align: center;
     font-size: 12px;
@@ -304,7 +303,7 @@ main {
 
 .payment-type-btn-container img {
     height: 50px;
-    width: 100%;
+    width: 90%;
 }
 
 .payment-type-btn {

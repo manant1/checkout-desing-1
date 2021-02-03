@@ -180,6 +180,7 @@ const BankCardPicker = ({ paymentMethods }) => {
         <div className={"row"} >
           <button style={{ marginLeft: "auto" }} className={"button-primary"}>submit</button>
         </div>
+        <br/>
       </form>
     </>
   )

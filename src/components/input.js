@@ -8,6 +8,7 @@ const CustomInput = ({ type, id, name, label, reference, errors, onChange, style
     borderRadius: 10,
     outline: "none",
     border: "none",
+    fontSize: "16px",
     padding: "5px 5px 5px 15px",
     boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"
   }
