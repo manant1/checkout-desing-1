@@ -4,8 +4,9 @@ import GatsbyImage from "gatsby-image"
 import { graphql, useStaticQuery } from "gatsby"
 import classNames from "classnames"
 import {FaChevronDown, FaChevronLeft, FaChevronUp, FaChevronRight} from "react-icons/fa"
+import { useSwipeable } from "react-swipeable"
 
-const Carousel = ({ products, total }) => {
+const ProductCarousel = ({ products, total }) => {
   const [activeSlides, setActiveSlides] = React.useState({
     current: 1,
     prev: 0,
@@ -13,7 +14,7 @@ const Carousel = ({ products, total }) => {
   })
 
   const nextSlide = () => {
-    if (activeSlides.next + 1 === products.length) {
+    if (activeSlides.next + 1 === products.length + 1) {
       return
     }
 
@@ -25,7 +26,7 @@ const Carousel = ({ products, total }) => {
   }
 
   const prevSlide = () => {
-    if (activeSlides.prev - 1 < 0) {
+    if (activeSlides.prev - 1 < -1) {
       return
     }
 
@@ -37,11 +38,11 @@ const Carousel = ({ products, total }) => {
   }
 
   const hasNext = () => {
-    return activeSlides.next + 1 !== products.length
+    return activeSlides.next + 1 !== products.length + 1
   }
 
   const hasPrev = () => {
-    return activeSlides.prev - 1 >= 0
+    return activeSlides.prev - 1 >= -1
   }
 
   const productImages = useStaticQuery(graphql`
@@ -57,8 +58,17 @@ const Carousel = ({ products, total }) => {
       }
   `)
 
+  const handlers = useSwipeable({
+    onSwipedUp: () => nextSlide(),
+    onSwipedDown: () => prevSlide(),
+    onSwipedLeft: () => nextSlide(),
+    onSwipedRight: () => prevSlide(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true
+  });
+
   return (
-    <div className={"slideshow-container"}>
+    <div className={"slideshow-container"} {...handlers}>
       {hasPrev() && (<FaChevronUp className={"slideshow-prev"} onClick={() => prevSlide()}/>)}
       {products.map((p, index) => (
         <div className={classNames({
@@ -72,7 +82,7 @@ const Carousel = ({ products, total }) => {
           <div className={"product-details"}>
             <div className={"product-img-container"}>
               <div className={"product-img-background"}
-                   style={{ width: activeSlides.current === index ? "65%" : "50%" }}>
+                   style={{ width: activeSlides.current === index ? "45%" : "25%" }}>
 
               </div>
               <GatsbyImage imgStyle={{
@@ -82,10 +92,10 @@ const Carousel = ({ products, total }) => {
             </div>
             <div className={"product-description"}>
               <ul>
-                <li style={{ fontSize: "25px", fontWeight: 600 }}>{p.name}</li>
+                <li style={{ fontSize: "22px", fontWeight: 600 }}>{p.name}</li>
                 <li style={{ fontSize: "15px", fontWeight: 400 }}>{p.description}</li>
                 <li>&nbsp;</li>
-                <li style={{ fontSize: "25px", fontWeight: 600 }}>{p.price} &euro;</li>
+                <li style={{ fontSize: "22px", fontWeight: 600 }}>{p.price} &euro;</li>
               </ul>
             </div>
           </div>
@@ -110,14 +120,14 @@ const Carousel = ({ products, total }) => {
   )
 }
 
-Carousel.defaultProps = {
+ProductCarousel.defaultProps = {
   products: [],
   total: 0
 }
 
-Carousel.propTypes = {
+ProductCarousel.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object),
   total: PropTypes.number
 }
 
-export default Carousel
+export default ProductCarousel

@@ -1,22 +1,84 @@
 import React from "react"
-import { Link } from "gatsby"
-
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import ProductCarousel from "../components/product-carousel"
+import BankCardPicker from "../components/bank-card-picker"
+import visa from "../images/visa.svg";
+import mastercard from "../images/mastercard.svg";
+import discover from "../images/discover.svg";
+import americanExpress from "../images/american-express.svg";
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+const IndexPage = () => {
+  const products = [{
+    name: "Nike Air Force",
+    image: "product1.png",
+    description: "Men lifestyle shoes / Size 46 / Size 46",
+    price: 59.99
+  }, {
+    name: "Nike Air Zoom",
+    image: "product2.png",
+    description: "Men running shoes / Size 46",
+    price: 59.99
+  }, {
+    name: "Nike Air Force",
+    image: "product1.png",
+    description: "Men lifestyle shoes / Size 46",
+    price: 59.99
+  }, {
+    name: "Nike Air Zoom",
+    image: "product2.png",
+    description: "Men running shoes / Size 46",
+    price: 59.99
+  }, {
+    name: "Nike Air Force",
+    image: "product1.png",
+    description: "Men lifestyle shoes / Size 46",
+    price: 59.99
+  }]
+
+  const paymentMethods = [{
+    name: "Mastercard",
+    image: mastercard
+  }, {
+    name: "Visa",
+    image: visa
+  }, {
+    name: "American Express",
+    image: americanExpress
+  }, {
+    name: "Discover",
+    image: discover
+  }]
+
+  return (
+    <Layout>
+      <SEO title="Home"/>
+      <div className={"container"}>
+        <div className={"card"}>
+          <div className={"card-products-container"}>
+            <div className={"card-content"}>
+              <div className={"card-inner-container"}>
+                <h2 style={{ color: "white" }}>Summary</h2>
+                <div style={{ height: "100%" }}>
+                  <ProductCarousel products={products} total={299.95}/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={"card-payment-container"}>
+            <div className={"card-content"}>
+              <div className={"card-inner-container"}>
+                <h2 style={{ color: "#3b3e71" }}>Order</h2>
+                <div>
+                  <BankCardPicker paymentMethods={paymentMethods}/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage
